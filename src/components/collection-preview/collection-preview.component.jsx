@@ -1,4 +1,5 @@
 import './collection-preview.styles.scss'
+import CollectionItem from '../collection-item/collection-item.component'
 
 const CollectionPreview = ({title, items}) => {
     return ( 
@@ -8,7 +9,11 @@ const CollectionPreview = ({title, items}) => {
             </h1>
             <div  className='preview'>
                     {/* below with performance concerns, due to every time the component rendered, the data will fetch */}
-                    {items.filter((item, idx) => idx < 4).map(item=>(<div key={item.id}>{item.name}</div>))}
+                    {items
+                    .filter((item, idx) => idx < 4)
+                    .map( ({id, ...otherItemProps}) => (
+                    <CollectionItem key={id} {...otherItemProps} />
+                    ))}
                 </div>
         </div>
      );
